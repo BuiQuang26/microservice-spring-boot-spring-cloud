@@ -2,6 +2,7 @@ package com.misroservices.authentication.securities;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.misroservices.authentication.entities.User;
+import com.misroservices.authentication.helper.ErrorHttpCode;
 import com.misroservices.authentication.helper.ErrorHttpResponse;
 import com.misroservices.authentication.helper.HttpResponse;
 import com.misroservices.authentication.repositories.UserRepository;
@@ -78,6 +79,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         logger.info("login failed");
         response.setStatus(400);
         response.setContentType(APPLICATION_JSON_VALUE);
-        objectMapper.writeValue(response.getOutputStream(),new ErrorHttpResponse(true, 400, "LOGIN_FAILED", "Login success"));
+        objectMapper.writeValue(response.getOutputStream(),new ErrorHttpResponse(true, 400, ErrorHttpCode.LOGIN_FAILED.name(), "Login success"));
     }
 }
