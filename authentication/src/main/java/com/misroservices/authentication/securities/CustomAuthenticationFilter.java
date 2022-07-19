@@ -78,6 +78,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         logger.info("login failed");
         response.setStatus(400);
         response.setContentType(APPLICATION_JSON_VALUE);
-        objectMapper.writeValue(response.getOutputStream(),new ErrorHttpResponse(true, 400, "LOGIN_FAILED", "Login success"));
+        objectMapper.writeValue(response.getOutputStream(),new ErrorHttpResponse(true, 400, "LOGIN_FAILED", "Login failed"));
     }
 }

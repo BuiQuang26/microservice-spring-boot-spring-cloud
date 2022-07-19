@@ -20,11 +20,16 @@ public class GatewayConfiguration {
     public RouteLocator myRoutes(RouteLocatorBuilder builder) {
 
         return builder.routes()
-                .route( "test_service",route->route
-                        .path("/api/test/**")
-                        .filters(f -> f.rewritePath("/api/test/(?<segment>.*)",
-                                "/test/${segment}"))
-                        .uri("lb://TEST-SERVICE"))
+                .route( "authentication-service",route->route
+                        .path("/auth/**")
+                        .filters(f -> f.rewritePath("/auth/(?<segment>.*)",
+                                "/api/auth/${segment}"))
+                        .uri("lb://AUTHENTICATION-SERVICE"))
+                .route( "user-service",route->route
+                        .path("/user/**")
+                        .filters(f -> f.rewritePath("/user/(?<segment>.*)",
+                                "/api/user/${segment}"))
+                        .uri("lb://USER-SERVICE"))
                 .build();
     }
 

@@ -1,13 +1,7 @@
 spring:
   application:
     name: gateway
-  cloud:
-    gateway:
-      routes:
-        - id: swagger-ui
-          uri: lb://TEST-SERVICE
-          predicates:
-            - Path=/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v2/api-docs,/webjars/**,/view/**
+
 server:
   port: 9000
 eureka:
