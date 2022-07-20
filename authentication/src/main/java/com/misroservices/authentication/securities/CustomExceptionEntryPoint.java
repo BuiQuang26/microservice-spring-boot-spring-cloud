@@ -25,6 +25,7 @@ public class CustomExceptionEntryPoint implements AuthenticationEntryPoint {
         response.setCharacterEncoding("UTF-8");
         if(response.getStatus() == 401){
             objectMapper.writeValue(response.getOutputStream(),
+<<<<<<< HEAD
                     new ErrorHttpResponse(false, 401, ErrorHttpCode.TOKEN_EXPIRED.name(), "Authentication token is expired"));
         }else if(response.getStatus() == 4011){
             response.setStatus(403);
@@ -34,6 +35,17 @@ public class CustomExceptionEntryPoint implements AuthenticationEntryPoint {
             response.setStatus(403);
             objectMapper.writeValue(response.getOutputStream(),
                     new ErrorHttpResponse(false, 403, ErrorHttpCode.UNAUTHORIZED.name(), "Access denied"));
+=======
+                    new ErrorHttpResponse(request.getRequestURI(), 401, "TOKEN_EXPIRED", "Authentication token is expired"));
+        }else if(response.getStatus() == 4011){
+            response.setStatus(403);
+            objectMapper.writeValue(response.getOutputStream(),
+                    new ErrorHttpResponse(request.getRequestURI(), 403, "TOKEN_INVALID", "Authentication token is invalid"));
+        }else {
+            response.setStatus(403);
+            objectMapper.writeValue(response.getOutputStream(),
+                    new ErrorHttpResponse(request.getRequestURI(), 401, "UNAUTHORIZED", "Access denied"));
+>>>>>>> master
         }
     }
 }
