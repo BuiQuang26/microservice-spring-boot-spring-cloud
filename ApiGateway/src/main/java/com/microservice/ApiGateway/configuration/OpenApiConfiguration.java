@@ -22,7 +22,7 @@ public class OpenApiConfiguration {
             System.out.println("id: " + definition.getId()+ "  "+definition.getUri().toString());
         }
         definitions.forEach(routeDefinition -> {
-            if(routeDefinition.getId().contains("-openapi")){
+            if(routeDefinition.getId().contains("-service")){
                 System.out.println(routeDefinition.getId());
                 String name = routeDefinition.getId();
                 swaggerUiConfigParameters.addGroup(name);

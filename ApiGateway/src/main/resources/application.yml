@@ -10,13 +10,20 @@ spring:
             - Path=/v3/api-docs/**
           filters:
             - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/openapi
-        - id: auth-openapi
+        - id: auth-service
           uri: lb://AUTHENTICATION-SERVICE
           predicates:
-            - Path= /auth-openapi/** , /api/auth/**
+            - Path= /auth-service/** , /api/auth/**
           filters:
-            - RewritePath=/auth-openapi/(?<path>.*), /api/auth/$\{path}
+            - RewritePath=/auth-service/(?<path>.*), /api/auth/$\{path}
             - RewritePath=/api/auth/(?<path>.*), /api/auth/$\{path}
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path= /user-service/** , /api/user/**
+          filters:
+            - RewritePath=/user-service/(?<path>.*), /api/user/$\{path}
+            - RewritePath=/api/user/(?<path>.*), /api/user/$\{path}
 
 server:
   port: 9000

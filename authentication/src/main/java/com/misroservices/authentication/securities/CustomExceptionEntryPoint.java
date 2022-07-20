@@ -1,7 +1,6 @@
 package com.misroservices.authentication.securities;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.misroservices.authentication.helper.ErrorHttpCode;
 import com.misroservices.authentication.helper.ErrorHttpResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
