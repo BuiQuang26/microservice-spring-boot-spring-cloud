@@ -25,24 +25,9 @@ public class WebConfiguration {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
 
-                List<String> path = new ArrayList<>();
-                //add default gateway origin
-                path.add("http://localhost:9000");
-
-                Application gateway = eurekaClient.getApplication("GATEWAY");
-                gateway.getInstances().forEach(instanceInfo -> {
-                    path.add(instanceInfo.getHomePageUrl());
-                });
-
-                System.out.println("Register allowedOrigins: ");
-                String[] paths = path.toArray(String[]::new);
-                for (String s : paths) {
-                    System.out.println(s);
-                }
-
                 registry.addMapping("/**")
                         .allowedMethods("*")
-                        .allowedOrigins(path.toArray(String[]::new));
+                        .allowedOrigins("*");
             }
         };
     }
