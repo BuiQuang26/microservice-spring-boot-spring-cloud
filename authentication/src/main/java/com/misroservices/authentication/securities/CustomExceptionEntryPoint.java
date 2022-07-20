@@ -32,7 +32,7 @@ public class CustomExceptionEntryPoint implements AuthenticationEntryPoint {
         }else {
             response.setStatus(403);
             objectMapper.writeValue(response.getOutputStream(),
-                    new ErrorHttpResponse(request.getRequestURI(), 401, "UNAUTHORIZED", "Access denied"));
+                    new ErrorHttpResponse(request.getRequestURI(), 403, "UNAUTHORIZED", "Access denied"));
         }
     }
 }
