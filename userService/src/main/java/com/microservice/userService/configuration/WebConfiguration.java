@@ -2,6 +2,7 @@ package com.microservice.userService.configuration;
 
 
 import com.netflix.discovery.EurekaClient;
+import com.netflix.discovery.shared.Application;
 import com.netflix.discovery.shared.Applications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -25,11 +26,12 @@ public class WebConfiguration {
             public void addCorsMappings(CorsRegistry registry) {
 
                 List<String> path = new ArrayList<>();
-                Applications applications = eurekaClient.getApplications();
-                applications.getRegisteredApplications().forEach(application -> {
-                    application.getInstances().forEach(instanceInfo -> {
-                        path.add(instanceInfo.getHomePageUrl());
-                    });
+                //add default gateway origin
+                path.add("http://localhost:9000");
+
+                Application gateway = eurekaClient.getApplication("GATEWAY");
+                gateway.getInstances().forEach(instanceInfo -> {
+                    path.add(instanceInfo.getHomePageUrl());
                 });
 
                 System.out.println("Register allowedOrigins: ");
