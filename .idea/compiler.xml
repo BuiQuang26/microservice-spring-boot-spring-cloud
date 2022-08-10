@@ -8,7 +8,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="DisciveryServer" />
-        <module name="microservice-spring-boot-spring-clound" />
         <module name="ApiGateway" />
         <module name="userService" />
         <module name="authentication" />
