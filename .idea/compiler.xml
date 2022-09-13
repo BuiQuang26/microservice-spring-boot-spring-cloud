@@ -9,7 +9,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="DisciveryServer" />
         <module name="ApiGateway" />
-        <module name="Microservices_beta" />
         <module name="userService" />
         <module name="authentication" />
       </profile>

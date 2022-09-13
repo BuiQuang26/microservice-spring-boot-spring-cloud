@@ -4,20 +4,32 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: swagger-ui
-          uri: lb://TEST-SERVICE
+        - id: openapi
+          uri: http://localhost:${server.port}
           predicates:
-            - Path=/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v2/api-docs,/webjars/**,/view/**
+            - Path=/v3/api-docs/**
+          filters:
+            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/openapi
+        - id: auth-service
+          uri: lb://AUTHENTICATION-SERVICE
+          predicates:
+            - Path= /auth-service/** , /api/auth/**
+          filters:
+            - RewritePath=/auth-service/(?<path>.*), /api/auth/$\{path}
+            - RewritePath=/api/auth/(?<path>.*), /api/auth/$\{path}
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path= /user-service/** , /api/user/**
+          filters:
+            - RewritePath=/user-service/(?<path>.*), /api/user/$\{path}
+            - RewritePath=/api/user/(?<path>.*), /api/user/$\{path}
+
 server:
   port: 9000
 eureka:
   client:
     registerWithEureka: true
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-
-springdoc:
-  version: '@springdoc.version@'
-  swagger-ui:
-    use-root-path: true
+      defaultZone: ${DISCOVERY_SERVER_IP}
 
